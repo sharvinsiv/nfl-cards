@@ -58,3 +58,4 @@ class MyCard extends LitElement {
       background: #005fa3;
     }
   `;
+}
