@@ -58,20 +58,3 @@ class MyCard extends LitElement {
       background: #005fa3;
     }
   `;
-
-  render() {
-    return html`
-      <img src="${this.image}" alt="${this.title}">
-      <div class="content">
-        <h2>${this.title}</h2>
-        <p>${this.description}</p>
-        <div class="buttons">
-          <button @click=${() => alert("Liked!")}>Like</button>
-          <button @click=${() => alert("Shared!")}>Share</button>
-        </div>
-      </div>
-    `;
-  }
-}
-
-customElements.define('my-card', MyCard);
