@@ -1,42 +1,137 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="Description" content="Boilerplate for polaris chip">
-  <base href="/">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NFL Cards</title>
   <style>
-    :root,
-    html,
     body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
       margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-      background-color: #ededed;
+      padding: 20px;
+      text-align: center;
     }
-    polaris-chip {
-      margin: 16px;
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      width: 300px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 10px;
+      text-align: left;
+    }
+
+    .card-content h2 {
+      margin: 5px 0;
+      font-size: 1.2rem;
+    }
+
+    .card-content p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .details-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      margin-top: 8px;
+      background-color: #0073e6;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .details-btn:hover {
+      background-color: #005bb5;
     }
   </style>
-  <title>polaris-chip / my-card</title>
 </head>
-
 <body>
-  <h1>polaris-chip</h1>
-  <!-- this is going to do whatever the tag's defaults are -->
-  <polaris-chip title="News of Record" link="https://psu.edu/"></polaris-chip>
-  <polaris-chip title="Faculty and Staff"></polaris-chip>
-  <polaris-chip title="Sports are the only thing that matter"></polaris-chip>
-  <polaris-chip title="Grants and donations"></polaris-chip>
 
-  <h1>my-card</h1>
-  <my-card></my-card>
+  <h1>My NFL Cards</h1>
 
-  <!-- this is what is bringing in the definition for this tag -->
-  <script type="module" src="./src/polaris-chip.js"></script>
-  <script type="module" src="./src/my-card.js"></script>
+  <div class="wrapper">
+
+    <div class="card">
+      <img src="https://npr.brightspotcdn.com/5a/3c/1de316984b1e8812825ff4f72808/ap23023847028931.jpg" alt="Patrick Mahomes">
+      <div class="card-content">
+        <h2>Patrick Mahomes</h2>
+        <p><strong>Position:</strong> Quarterback</p>
+        <p>Star QB for the Chiefs.</p>
+        <a href="https://hax.psu.edu" class="details-btn" target="_blank">Details</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://www.kget.com/wp-content/uploads/sites/2/2024/01/65b72a0244a699.29243112.jpeg?w=2560&h=1440&crop=1" alt="Travis Kelce">
+      <div class="card-content">
+        <h2>Travis Kelce</h2>
+        <p><strong>Position:</strong> Tight End</p>
+        <p>Elite tight end for the Chiefs.</p>
+        <a href="https://hax.psu.edu" class="details-btn" target="_blank">Details</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://statico.profootballnetwork.com/wp-content/uploads/2024/10/18130742/JuJu-Smith-Schuster-Fantasy-Advice-2024-1024x719.jpg" alt="Juju Smith-Schuster">
+      <div class="card-content">
+        <h2>Juju Smith-Schuster</h2>
+        <p><strong>Position:</strong> Wide Receiver</p>
+        <p>Fast and explosive receiver.</p>
+        <a href="https://hax.psu.edu" class="details-btn" target="_blank">Details</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn.britannica.com/43/243743-050-B44485BB/Jalen-Hurts-Super-Bowl-LVII.jpg" alt="Jalen Hurts">
+      <div class="card-content">
+        <h2>Jalen Hurts</h2>
+        <p><strong>Position:</strong> Quarterback</p>
+        <p>Accurate ball thrower.</p>
+        <a href="https://hax.psu.edu" class="details-btn" target="_blank">Details</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://statico.profootballnetwork.com/wp-content/uploads/2025/05/24224331/saquon-barkley-slammed-over-eagles-top-nfl-history-team-claim-1920x1280.jpg" alt="Saquon Barkley">
+      <div class="card-content">
+        <h2>Saquon Barkley</h2>
+        <p><strong>Position:</strong> Running Back</p>
+        <p>The GOAT</p>
+        <a href="https://hax.psu.edu" class="details-btn" target="_blank">Details</a>
+      </div>
+    </div>
+
+  </div>
+
 </body>
-
-</html>
