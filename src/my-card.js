@@ -1,3 +1,5 @@
+import "@haxtheweb/meme-maker/meme-maker.js";
+
 class MyCard extends HTMLElement {
   constructor() {
     super();
@@ -13,7 +15,6 @@ class MyCard extends HTMLElement {
           font-family: Arial, sans-serif;
           text-align: center;
         }
-
         .card {
           border: 8px solid #ccc;
           border-radius: 8px;
@@ -22,14 +23,12 @@ class MyCard extends HTMLElement {
           transition: all 0.35s ease-in-out;
           box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
-
         :host(:hover) .card,
         :host(:focus-within) .card {
           opacity: 1;
           outline: 2px solid green;
           outline-offset: 8px;
         }
-
         :host([fancy]) .card,
         :host(.fancy) .card {
           border-color: #0a7a27;
@@ -43,7 +42,6 @@ class MyCard extends HTMLElement {
           border-top-left-radius: 8px;
           border-top-right-radius: 8px;
         }
-
         .fallback-img {
           width: 100%;
           height: 256px;
@@ -52,32 +50,27 @@ class MyCard extends HTMLElement {
           border-top-left-radius: 8px;
           border-top-right-radius: 8px;
         }
-
         .card-content {
           padding: 12px;
           background: #fde8e8; 
         }
-
         ::slotted([slot="title"]) {
           display: block;
           margin: 8px 0 4px;
           font-size: 1.4rem;
           font-weight: 700;
         }
-
         ::slotted([slot="subtitle"]) {
           display: block;
           margin: 4px 0;
           font-size: 0.95rem;
         }
-
         ::slotted([slot="description"]) {
           display: block;
           margin: 8px 0;
           font-size: 0.9rem;
           color: #444;
         }
-
         .default-btn {
           display: inline-block;
           padding: 8px 14px;
@@ -99,6 +92,13 @@ class MyCard extends HTMLElement {
           <slot name="subtitle"></slot>
           <slot name="description"></slot>
 
+          <!-- Meme Maker inside the card -->
+          <meme-maker 
+            image-url="https://placekitten.com/400/300"
+            top-text="When your code works"
+            bottom-text="But you don’t know why">
+          </meme-maker>
+
           <div>
             <slot name="link">
               <a class="default-btn" href="https://hax.psu.edu" target="_blank" rel="noopener">Details</a>
@@ -111,4 +111,3 @@ class MyCard extends HTMLElement {
 }
 
 customElements.define('my-card', MyCard);
-
