@@ -1,146 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>NFL Cards</title>
+
+  <script>
+    class MyCard extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot.innerHTML = `
+          <style>
+            :host {
+              display: inline-block;
+              width: 400px;
+              box-sizing: border-box;
+              margin: 12px;
+              font-family: Arial, sans-serif;
+              text-align: center;
+            }
+            .card {
+              border: 8px solid #ccc;
+              border-radius: 8px;
+              background: #fff;
+              overflow: hidden;
+              transition: all 0.35s ease-in-out;
+              box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            }
+            :host(:hover) .card,
+            :host(:focus-within) .card {
+              opacity: 1;
+              outline: 2px solid green;
+              outline-offset: 8px;
+            }
+            :host([fancy]) .card,
+            :host(.fancy) .card {
+              border-color: #0a7a27;
+              box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+            }
+            ::slotted(img[slot="image"]) {
+              width: 100%;
+              height: 256px;
+              object-fit: cover;
+              display: block;
+              border-top-left-radius: 8px;
+              border-top-right-radius: 8px;
+            }
+            .card-content {
+              padding: 12px;
+              background: #fde8e8;
+            }
+            ::slotted([slot="title"]) {
+              display: block;
+              margin: 8px 0 4px;
+              font-size: 1.4rem;
+              font-weight: 700;
+            }
+            ::slotted([slot="subtitle"]) {
+              display: block;
+              margin: 4px 0;
+              font-size: 0.95rem;
+              color: #222;
+            }
+            ::slotted([slot="description"]) {
+              display: block;
+              margin: 8px 0;
+              font-size: 0.9rem;
+              color: #555;
+            }
+            .default-btn {
+              display: inline-block;
+              padding: 8px 14px;
+              background: #0073e6;
+              color: white;
+              text-decoration: none;
+              border-radius: 6px;
+              font-size: 0.9rem;
+              margin-top: 8px;
+            }
+            .default-btn:hover { background: #005bb5; }
+          </style>
+          <div class="card" part="card">
+            <slot name="image"></slot>
+            <div class="card-content" part="content">
+              <slot name="title"></slot>
+              <slot name="subtitle"></slot>
+              <slot name="description"></slot>
+              <div>
+                <slot name="link">
+                  <a class="default-btn" href="https://hax.psu.edu" target="_blank" rel="noopener">Details</a>
+                </slot>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+    customElements.define('my-card', MyCard);
+  </script>
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: red;
+      background-color: white;
       margin: 0;
-      padding: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
       text-align: center;
     }
-
     h1 {
-      font-size: 2em;
-      margin: 16px 0;
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+      color: black;
     }
-
     .wrapper {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 16px;
-      margin-bottom: 16px;
+      gap: 18px 24px;
     }
-
-    .card {
-      width: 400px;
-      border: 8px solid #ccc;
-      border-radius: 8px;
-      background-color: #fff;
-      margin: 8px;
-      text-align: center;
-      opacity: 0.9;
-      transition: 0.6s all ease-in-out;
+    @media (max-width: 880px) {
+      my-card { width: calc(50% - 24px); }
     }
-
-    .card:hover, .card:focus-within {
-      opacity: 1;
-      outline: 2px solid green;
-      outline-offset: 8px;
-    }
-
-    .card img {
-      width: 400px;
-      height: 256px;
-      object-fit: cover;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-    }
-
-    .card-content {
-      padding: 8px;
-    }
-
-    .card-content h2 {
-      margin: 8px 0;
-      font-size: 1.4rem;
-    }
-
-    .card-content p {
-      margin: 8px 0;
-      font-size: 0.9rem;
-      color: #555;
-    }
-
-    .details-btn {
-      display: inline-block;
-      padding: 8px 16px;
-      background: #0073e6;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      margin-top: 8px;
-      transition: background 0.3s;
-    }
-
-    .details-btn:hover, .details-btn:focus {
-      background: #005bb5;
-      outline: none;
+    @media (max-width: 480px) {
+      my-card { width: calc(100% - 24px); }
     }
   </style>
 </head>
 <body>
-
-  <h1>My NFL Cards</h1>
-
+  <h1>NFL Cards</h1>
   <div class="wrapper">
+    <my-card fancy>
+      <img slot="image" src="https://npr.brightspotcdn.com/5a/3c/1de316984b1e8812825ff4f72808/ap23023847028931.jpg" alt="Patrick Mahomes">
+      <span slot="title">Patrick Mahomes</span>
+      <span slot="subtitle"><strong>Position:</strong> Quarterback</span>
+      <span slot="description">QB for the Chiefs.</span>
+      <a slot="link" href="https://hax.psu.edu" target="_blank" rel="noopener">Details</a>
+    </my-card>
 
-    <div class="card">
-      <img src="https://npr.brightspotcdn.com/5a/3c/1de316984b1e8812825ff4f72808/ap23023847028931.jpg" alt="Patrick Mahomes">
-      <div class="card-content">
-        <h2>Patrick Mahomes</h2>
-        <p><strong>Position:</strong> Quarterback</p>
-        <p>Star QB for the Chiefs.</p>
-        <a href="https://hax.psu.edu" class="details-btn" target="_blank">Details</a>
-      </div>
-    </div>
+    <my-card>
+      <img slot="image" src="https://www.kget.com/wp-content/uploads/sites/2/2024/01/65b72a0244a699.29243112.jpeg?w=2560&h=1440&crop=1" alt="Travis Kelce">
+      <span slot="title">Travis Kelce</span>
+      <span slot="subtitle"><strong>Position:</strong> Tight End</span>
+      <span slot="description">TE for the Chiefs.</span>
+      <a slot="link" href="https://hax.psu.edu" target="_blank" rel="noopener">Details</a>
+    </my-card>
 
-    <div class="card">
-      <img src="https://www.kget.com/wp-content/uploads/sites/2/2024/01/65b72a0244a699.29243112.jpeg?w=2560&h=1440&crop=1" alt="Travis Kelce">
-      <div class="card-content">
-        <h2>Travis Kelce</h2>
-        <p><strong>Position:</strong> Tight End</p>
-        <p>Elite tight end for the Chiefs.</p>
-        <a href="https://hax.psu.edu" class="details-btn" target="_blank">Details</a>
-      </div>
-    </div>
+    <my-card>
+      <img slot="image" src="https://statico.profootballnetwork.com/wp-content/uploads/2024/10/18130742/JuJu-Smith-Schuster-Fantasy-Advice-2024-1024x719.jpg" alt="Juju">
+      <span slot="title">Juju Smith-Schuster</span>
+      <span slot="subtitle"><strong>Position:</strong> Wide Receiver</span>
+      <span slot="description">WR for the Chiefs</span>
+      <a slot="link" href="https://hax.psu.edu" target="_blank" rel="noopener">Details</a>
+    </my-card>
 
-    <div class="card">
-      <img src="https://statico.profootballnetwork.com/wp-content/uploads/2024/10/18130742/JuJu-Smith-Schuster-Fantasy-Advice-2024-1024x719.jpg" alt="Juju Smith-Schuster">
-      <div class="card-content">
-        <h2>Juju Smith-Schuster</h2>
-        <p><strong>Position:</strong> Wide Receiver</p>
-        <p>Fast and explosive receiver.</p>
-        <a href="https://hax.psu.edu" class="details-btn" target="_blank">Details</a>
-      </div>
-    </div>
+    <my-card>
+      <img slot="image" src="https://cdn.britannica.com/43/243743-050-B44485BB/Jalen-Hurts-Super-Bowl-LVII.jpg" alt="Jalen Hurts">
+      <span slot="title">Jalen Hurts</span>
+      <span slot="subtitle"><strong>Position:</strong> Quarterback</span>
+      <span slot="description">QB for the Eagles.</span>
+      <a slot="link" href="https://hax.psu.edu" target="_blank" rel="noopener">Details</a>
+    </my-card>
 
-    <div class="card">
-      <img src="https://cdn.britannica.com/43/243743-050-B44485BB/Jalen-Hurts-Super-Bowl-LVII.jpg" alt="Jalen Hurts">
-      <div class="card-content">
-        <h2>Jalen Hurts</h2>
-        <p><strong>Position:</strong> Quarterback</p>
-        <p>Accurate ball thrower.</p>
-        <a href="https://hax.psu.edu" class="details-btn" target="_blank">Details</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://statico.profootballnetwork.com/wp-content/uploads/2025/05/24224331/saquon-barkley-slammed-over-eagles-top-nfl-history-team-claim-1920x1280.jpg" alt="Saquon Barkley">
-      <div class="card-content">
-        <h2>Saquon Barkley</h2>
-        <p><strong>Position:</strong> Running Back</p>
-        <p>The GOAT</p>
-        <a href="https://hax.psu.edu" class="details-btn" target="_blank">Details</a>
-      </div>
-    </div>
-
+    <my-card>
+      <img slot="image" src="https://statico.profootballnetwork.com/wp-content/uploads/2025/05/24224331/saquon-barkley-slammed-over-eagles-top-nfl-history-team-claim-1920x1280.jpg" alt="Saquon Barkley">
+      <span slot="title">Saquon Barkley</span>
+      <span slot="subtitle"><strong>Position:</strong> Running Back</span>
+      <span slot="description">RB for the Eagles.</span>
+      <a slot="link" href="https://hax.psu.edu" target="_blank" rel="noopener">Details</a>
+    </my-card>
   </div>
-
 </body>
 </html>
